@@ -134,6 +134,46 @@ docker compose down
 
 ---
 
+## Running Tests
+
+To run all backend tests (unit and integration):
+
+```bash
+yarn test
+```
+
+To run tests in watch mode (auto re-run on file changes):
+
+```bash
+yarn test:watch
+```
+
+To see test coverage:
+
+```bash
+yarn test:cov
+```
+
+---
+
+## Expected Test Output
+
+When running `yarn test`, you should see something like:
+
+```
+PASS  src/app.controller.spec.ts
+PASS  src/snippet.service.spec.ts
+PASS  src/snippet.controller.spec.ts
+
+Test Suites: 3 passed, 3 total
+Tests:       7 passed, 7 total
+Snapshots:   0 total
+Time:        1.678 s, estimated 2 s
+Ran all test suites.
+```
+
+---
+
 ## Notes
 
 - The project is being developed incrementally, following TDD and best practices.

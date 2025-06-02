@@ -8,6 +8,10 @@ export type SnippetDocument = HydratedDocument<Snippet>;
 export class Snippet {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   @Prop({ required: true })
+  _id: string;
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+  @Prop({ required: true })
   text: string;
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call

@@ -89,3 +89,31 @@ The frontend uses Next.js API routes to proxy requests to the backend:
 - `GET /api/snippet?id=...` → Forwards to backend `/snippets/:id`
 
 See the backend README for more details on the API.
+
+## Unit tests
+
+To run unit tests with Jest:
+
+```bash
+yarn test
+```
+
+Or, if you are using npm:
+
+```bash
+npm run test
+```
+
+Example of successful test output:
+
+```
+ PASS  src/pages/index.test.tsx
+ PASS  src/pages/snippets.test.tsx
+ PASS  src/pages/snippet.test.tsx
+
+Test Suites: 3 passed, 3 total
+Tests:       9 passed, 9 total
+Snapshots:   0 total
+Time:        0.681 s, estimated 1 s
+Ran all test suites.
+```

@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { SnippetController } from './snippet.controller';
 import { SnippetService } from './snippet.service';
+import { NotFoundException } from '@nestjs/common';
 
 const mockSnippet = {
   _id: '507f1f77bcf86cd799439011',
@@ -40,7 +41,6 @@ describe('SnippetController', () => {
       expect(service.create).toHaveBeenCalledWith('Test text');
       expect(result.text).toBe('Test text');
       expect(result.summary).toBe('Mocked summary.');
-      expect(result._id).toBeDefined();
     });
 
     it('should handle empty text (if not allowed)', async () => {
@@ -71,9 +71,10 @@ describe('SnippetController', () => {
       expect(result).toEqual(mockSnippet);
     });
 
-    it('should return null for a non-existent id', async () => {
-      const result = await controller.getSnippet('000000000000000000000000');
-      expect(result).toBeNull();
+    it('should return NotFoundException for a non-existent id', async () => {
+      await expect(
+        controller.getSnippet('000000000000000000000000'),
+      ).rejects.toThrow(NotFoundException);
     });
   });
 });

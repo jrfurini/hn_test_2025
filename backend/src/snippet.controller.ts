@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  NotFoundException,
+} from '@nestjs/common';
 import { SnippetService } from './snippet.service';
 import { Snippet } from './snippet.schema';
 
@@ -7,8 +14,17 @@ export class SnippetController {
   constructor(private readonly snippetService: SnippetService) {}
 
   @Get('/snippets/:id')
-  getSnippet(@Param('id') id: string): Promise<Snippet | null> {
-    return this.snippetService.findById(id);
+  async getSnippet(@Param('id') id: string): Promise<Snippet> {
+    try {
+      const snippet = await this.snippetService.findById(id);
+      if (!snippet) {
+        throw new NotFoundException('Snippet not found');
+      }
+      return snippet;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (e) {
+      throw new NotFoundException('Snippet not found');
+    }
   }
 
   @Post('/snippets')

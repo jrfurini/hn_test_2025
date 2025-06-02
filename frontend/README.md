@@ -59,3 +59,33 @@ The frontend will be available at http://localhost:3030
 
 - All documentation and comments are in English, as required by the challenge.
 - The project is being developed incrementally, following best practices.
+
+# Frontend - Next.js
+
+This project is the web interface for the House Numbers AI Snippet Service.
+
+## Main Pages
+
+- `/snippets` — Create a new snippet. Submit text and receive an AI-generated summary and the snippet ID.
+- `/snippet` — Query a snippet by its ID. Enter the ID to retrieve the original text and its summary.
+
+## Usage
+
+- Start the frontend with:
+
+  ```bash
+  yarn dev
+  ```
+
+  or use Docker Compose from the project root.
+
+- Make sure the backend is running and accessible at the expected address (see `.env` or proxy API routes).
+
+## API Proxy
+
+The frontend uses Next.js API routes to proxy requests to the backend:
+
+- `POST /api/snippets` → Forwards to backend `/snippets`
+- `GET /api/snippet?id=...` → Forwards to backend `/snippets/:id`
+
+See the backend README for more details on the API.

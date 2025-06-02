@@ -6,9 +6,7 @@ services:
     restart: always
     ports:
       - "27017:27017"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+    command: mongod --noauth
     volumes:
       - mongo_data:/data/db
 
@@ -18,9 +16,8 @@ services:
     restart: always
     ports:
       - "3000:3000"
-    environment:
-      - MONGODB_URI=mongodb://root:example@mongo:27017/house_numbers?authSource=admin
-      - OPENAI_API_KEY=your_openai_api_key_here
+    env_file:
+      - ./backend/.env_docker
     depends_on:
       - mongo
     command: yarn start:prod

@@ -21,15 +21,14 @@ export class SnippetController {
         throw new NotFoundException('Snippet not found');
       }
       return snippet;
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
+      console.error(e);
       throw new NotFoundException('Snippet not found');
     }
   }
 
   @Post('/snippets')
   createSnippet(@Body() createSnippetDto: { text: string }): Promise<Snippet> {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
     return this.snippetService.create(createSnippetDto.text);
   }
 }

@@ -44,7 +44,6 @@ describe('SnippetController', () => {
     });
 
     it('should handle empty text (if not allowed)', async () => {
-      // Supondo que o serviço retorna erro para texto vazio
       (service.create as jest.Mock).mockRejectedValueOnce(
         new Error('Text is required'),
       );

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { snippetApi } from "./api/snippet.api";
 
 export default function SnippetsPage() {
   const [text, setText] = useState("");
@@ -12,24 +13,35 @@ export default function SnippetsPage() {
     setLoading(true);
     setError("");
     setSummary("");
+
     try {
-      const res = await fetch("/api/snippets", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text }),
-      });
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.message || "Error creating snippet");
-      }
-      const data = await res.json();
-      setSummary(data.summary);
-      setId(data._id);
+      const snippet = await snippetApi.createSnippet(text);
+      setSummary(snippet.summary);
+      setId(snippet._id);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Unknown error");
     } finally {
       setLoading(false);
     }
+
+    // try {
+    //   const res = await fetch("/api/snippets", {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({ text }),
+    //   });
+    //   if (!res.ok) {
+    //     const data = await res.json();
+    //     throw new Error(data.message || "Error creating snippet");
+    //   }
+    //   const data = await res.json();
+    //   setSummary(data.summary);
+    //   setId(data._id);
+    // } catch (err: unknown) {
+    //   setError(err instanceof Error ? err.message : "Unknown error");
+    // } finally {
+    //   setLoading(false);
+    // }
   };
 
   return (

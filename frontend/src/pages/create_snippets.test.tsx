@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import SnippetsPage from "./snippets";
+import CreateSnippetsPage from "./create_snippets";
 
-describe("SnippetsPage", () => {
+describe("CreateSnippetsPage", () => {
   beforeEach(() => {
     global.fetch = jest.fn();
   });
@@ -10,7 +10,7 @@ describe("SnippetsPage", () => {
   });
 
   it("renders title and textarea", () => {
-    render(<SnippetsPage />);
+    render(<CreateSnippetsPage />);
     expect(
       screen.getByRole("heading", { name: /create snippet/i })
     ).toBeInTheDocument();
@@ -27,7 +27,7 @@ describe("SnippetsPage", () => {
       ok: false,
       json: async () => ({ message: "Error creating snippet" }),
     });
-    render(<SnippetsPage />);
+    render(<CreateSnippetsPage />);
     fireEvent.change(screen.getByPlaceholderText(/enter your text here/i), {
       target: { value: "Test" },
     });
@@ -42,7 +42,7 @@ describe("SnippetsPage", () => {
       ok: true,
       json: async () => ({ summary: "Generated summary", _id: "id123" }),
     });
-    render(<SnippetsPage />);
+    render(<CreateSnippetsPage />);
     fireEvent.change(screen.getByPlaceholderText(/enter your text here/i), {
       target: { value: "Test" },
     });

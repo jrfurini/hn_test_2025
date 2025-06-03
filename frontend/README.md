@@ -66,7 +66,7 @@ This project is the web interface for the House Numbers AI Snippet Service.
 
 ## Main Pages
 
-- `/snippets` — Create a new snippet. Submit text and receive an AI-generated summary and the snippet ID.
+- `/create_snippets` — Create a new snippet. Submit text and receive an AI-generated summary and the snippet ID.
 - `/snippet` — Query a snippet by its ID. Enter the ID to retrieve the original text and its summary.
 
 ## Usage

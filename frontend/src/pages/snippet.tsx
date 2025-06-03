@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { snippetApi } from "./api/snippet.api";
 
 interface Snippet {
   text: string;
@@ -17,19 +18,10 @@ export default function SnippetQueryPage() {
     setLoading(true);
     setError("");
     setSnippet(null);
+
     try {
-      const res = await fetch(`/api/snippet?id=${encodeURIComponent(id)}`);
-      if (res.status === 404) {
-        setError("Snippet not found.");
-        setSnippet(null);
-        return;
-      }
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.message || "Error fetching snippet");
-      }
-      const data = await res.json();
-      setSnippet(data);
+      const snippet = await snippetApi.getSnippet(id);
+      setSnippet(snippet);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Unknown error");
     } finally {
